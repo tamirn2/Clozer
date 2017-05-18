@@ -18,6 +18,7 @@ var numUsers = 0;
 
 io.on('connection', function (socket) {
     console.log("----------------",socket);
+
     var addedUser = false;
      var room = socket.handshake['query']['room_var'];
 
@@ -50,7 +51,7 @@ io.on('connection', function (socket) {
             numUsers: numUsers
         });
         // echo globally (all clients) that a person has connected
-        socket.broadcast.emit('user joined', {
+        socket.to(room).emit('user joined', {
             username: socket.username,
             numUsers: numUsers
         });
@@ -58,7 +59,7 @@ io.on('connection', function (socket) {
 
     // when the client emits 'typing', we broadcast it to others
     socket.on('typing', function () {
-        socket.broadcast.emit('typing', {
+        socket.to(room).emit('typing', {
             username: socket.username
         });
     });//pizza
