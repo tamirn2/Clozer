@@ -93,6 +93,7 @@ io.on('connection', function (socket) {
                 username: socket.username,
                 numUsers: rooms[room].length
             });
+            rooms[room].removeAttribute(socket.username);
         }
     });
 
