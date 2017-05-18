@@ -93,7 +93,11 @@ io.on('connection', function (socket) {
                 username: socket.username,
                 numUsers: rooms[room].length
             });
-            rooms[room].removeAttribute(socket.username);
+            var indexToDelete = rooms[room].indexOf(socket.username);
+            if (indexToDelete > -1) {
+                rooms[room].splice(indexToDelete, 1);
+            }
+            console.log("rooms defined",rooms,"room we have:",room);
         }
     });
 
