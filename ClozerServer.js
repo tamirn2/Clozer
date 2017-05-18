@@ -100,10 +100,12 @@ io.on('connection', function (socket) {
             }
             console.log("rooms defined",rooms,"room we have:",room);
         }
+        if (numUsers !== 0){
         socket.to(room).emit('user left', {
             username: socket.username,
             numUsers: rooms[room].length
-        });
+        }
+        )};
     });
 
 
