@@ -19,9 +19,11 @@ var numUsers = 0;
 io.on('connection', function (socket) {
     console.log("----------------",socket);
     var addedUser = false;
-    socket.join(room,function () {
+     var room = socket.handshake['query']['room_var'];
 
-    })
+     socket.join(room);
+     console.log('user joined room #'+room);
+
     // when the client emits 'new message', this listens and executes
     socket.on('new message', function (data) {
         // we tell the client to execute 'new message'
