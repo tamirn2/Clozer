@@ -51,7 +51,7 @@ io.on('connection', function (socket) {
         socket.broadcast.emit('typing', {
             username: socket.username
         });
-    });//pizza world
+    });//pizza
 
     // when the client emits 'stop typing', we broadcast it to others
     socket.on('stop typing', function () {
