@@ -18,7 +18,7 @@ var numUsers = 0;
 var rooms={};
 
 io.on('connection', function (socket) {
-    //console.log("----------------",socket);
+    console.log("----------------",socket);
     var addedUser = false;
     var room = socket.handshake['query']['room_var'];
     console.log("rooms",rooms[room]);
