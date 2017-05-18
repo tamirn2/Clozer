@@ -49,7 +49,7 @@ io.on('connection', function (socket) {
         // we store the username in the socket session for this client
         socket.username = username;
         ++numUsers;
-        if(!rooms[room] || rooms[room] === undefined){
+        if(rooms[room] === undefined){
             rooms[room]=[];
             rooms[room].push(socket.username);
         }else{
