@@ -24,22 +24,22 @@ io.on('connection', function (socket) {
     // console.log("rooms we defined",rooms[room]);
 
     // console.log("room debug:",room);
-     socket.join(room);
-     // console.log('user joined room #'+room);
+    socket.join(room);
+    // console.log('user joined room #'+room);
 
     // when the client emits 'new message', this listens and executes
     socket.on('new message', function (data) {
         // we tell the client to execute 'new message'
         //io.to(room).emit('chat message', msg);
         /*socket.broadcast.emit('new message', {
-            username: socket.username,
-            message: data
-        });*/
-        //
-        socket.to(room).emit('new message', {
          username: socket.username,
          message: data
-         });
+         });*/
+        //
+        socket.to(room).emit('new message', {
+            username: socket.username,
+            message: data
+        });
     });
 
     // when the client emits 'add user', this listens and executes
@@ -93,6 +93,10 @@ io.on('connection', function (socket) {
             var indexToDelete = rooms[room].indexOf(socket.username);
             if (indexToDelete > -1) {
                 rooms[room].splice(indexToDelete, 1);
+                if(numUsers === 0)
+                {
+                    delete rooms[room]
+                }
             }
             console.log("rooms defined",rooms,"room we have:",room);
         }
