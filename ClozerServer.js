@@ -53,6 +53,7 @@ io.on('connection', function (socket) {
             rooms[room]=[];
             console.log("rooms not defined yet",rooms,"room we have:",room);
             rooms[room].push(socket.username);
+            console.log("rooms after connection",rooms,"room we have:",room);
         }else{
             rooms[room].push(socket.username);
             console.log("rooms defined",rooms,"room we have:",room);
