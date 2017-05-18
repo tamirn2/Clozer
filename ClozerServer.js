@@ -28,6 +28,7 @@ io.on('connection', function (socket) {
     }else{
         rooms[room].push(socket.username);
     }
+    console.log("rooms",rooms);
      socket.join(room);
      console.log('user joined room #'+room);
 
