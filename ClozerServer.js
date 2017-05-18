@@ -23,7 +23,7 @@ io.on('connection', function (socket) {
     var room = socket.handshake['query']['room_var'];
     console.log("rooms we defined",rooms[room]);
 
-    console.log("rooms",rooms);
+    console.log("room",room);
      socket.join(room);
      console.log('user joined room #'+room);
 
