@@ -15,12 +15,19 @@ app.use(express.static(__dirname + '/public'));
 // Chatroom
 
 var numUsers = 0;
+var rooms={};
 
 io.on('connection', function (socket) {
     //console.log("----------------",socket);
     var addedUser = false;
-     var room = socket.handshake['query']['room_var'];
-
+    var room = socket.handshake['query']['room_var'];
+    console.log("rooms",rooms[room]);
+    if(!rooms[room] || rooms[room] === undefined){
+        rooms[room]=[];
+        rooms[room].push(socket.username);
+    }else{
+        rooms[room].push(socket.username);
+    }
      socket.join(room);
      console.log('user joined room #'+room);
 
@@ -48,25 +55,25 @@ io.on('connection', function (socket) {
         ++numUsers;
         addedUser = true;
         socket.emit('login', {
-            numUsers: numUsers
+            numUsers: rooms[room].length
         });
         // echo globally (all clients) that a person has connected
-        socket.broadcast.emit('user joined', {
+        socket.to(room).emit('user joined', {
             username: socket.username,
-            numUsers: numUsers
+            numUsers: rooms[room].length
         });
     });
 
     // when the client emits 'typing', we broadcast it to others
     socket.on('typing', function () {
-        socket.broadcast.emit('typing', {
+        socket.to(room).emit('typing', {
             username: socket.username
         });
     });//pizza
 
     // when the client emits 'stop typing', we broadcast it to others
     socket.on('stop typing', function () {
-        socket.broadcast.emit('stop typing', {
+        socket.to(room).emit('stop typing', {
             username: socket.username
         });
     });
@@ -77,9 +84,9 @@ io.on('connection', function (socket) {
             --numUsers;
 
             // echo globally that this client has lefte
-            socket.broadcast.emit('user left', {
+            socket.to(room).emit('user left', {
                 username: socket.username,
-                numUsers: numUsers
+                numUsers: rooms[room].length
             });
         }
     });
