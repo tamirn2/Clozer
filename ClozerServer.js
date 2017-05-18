@@ -89,17 +89,15 @@ io.on('connection', function (socket) {
             --numUsers;
 
             // echo globally that this client has lefte
-            socket.to(room).emit('user left', {
-                username: socket.username,
-                numUsers: rooms[room].length
-            });
+
             var indexToDelete = rooms[room].indexOf(socket.username);
             if (indexToDelete > -1) {
                 rooms[room].splice(indexToDelete, 1);
             }
             console.log("rooms defined",rooms,"room we have:",room);
         }
-        socket.emit('login', {
+        socket.to(room).emit('user left', {
+            username: socket.username,
             numUsers: rooms[room].length
         });
     });
