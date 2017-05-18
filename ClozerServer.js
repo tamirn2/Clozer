@@ -18,14 +18,14 @@ var numUsers = 0;
 var rooms={};
 
 io.on('connection', function (socket) {
-    console.log("----------------",socket);
+    // console.log("----------------",socket);
     var addedUser = false;
     var room = socket.handshake['query']['room_var'];
-    console.log("rooms we defined",rooms[room]);
+    // console.log("rooms we defined",rooms[room]);
 
-    console.log("room debug:",room);
+    // console.log("room debug:",room);
      socket.join(room);
-     console.log('user joined room #'+room);
+     // console.log('user joined room #'+room);
 
     // when the client emits 'new message', this listens and executes
     socket.on('new message', function (data) {
@@ -51,9 +51,11 @@ io.on('connection', function (socket) {
         ++numUsers;
         if(rooms[room] === undefined){
             rooms[room]=[];
+            console.log("rooms not defined yet",rooms,"room we have:",room);
             rooms[room].push(socket.username);
         }else{
             rooms[room].push(socket.username);
+            console.log("rooms defined",rooms,"room we have:",room);
         }
         addedUser = true;
         socket.emit('login', {
