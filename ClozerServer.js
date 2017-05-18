@@ -66,7 +66,7 @@ io.on('connection', function (socket) {
 
     // when the client emits 'stop typing', we broadcast it to others
     socket.on('stop typing', function () {
-        socket.broadcast.emit('stop typing', {
+        socket.to(room).emit('stop typing', {
             username: socket.username
         });
     });
@@ -77,7 +77,7 @@ io.on('connection', function (socket) {
             --numUsers;
 
             // echo globally that this client has lefte
-            socket.broadcast.emit('user left', {
+            socket.to(room).emit('user left', {
                 username: socket.username,
                 numUsers: numUsers
             });
