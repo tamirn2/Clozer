@@ -21,7 +21,7 @@ io.on('connection', function (socket) {
     console.log("----------------",socket);
     var addedUser = false;
     var room = socket.handshake['query']['room_var'];
-    console.log("rooms",rooms[room]);
+    console.log("rooms we defined",rooms[room]);
 
     console.log("rooms",rooms);
      socket.join(room);
