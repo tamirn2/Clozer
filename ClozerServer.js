@@ -25,7 +25,9 @@ io.on('connection', function (socket) {
     // console.log("room debug:",room);
     socket.join(room);
     // console.log('user joined room #'+room);
-
+    socket.to(room).emit('user joined', {
+        username: socket.username,
+    });//todo delete the todo
     // when the client emits 'new message', this listens and executes
     socket.on('new message', function (data) {
         // we tell the client to execute 'new message'
