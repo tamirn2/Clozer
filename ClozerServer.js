@@ -17,8 +17,11 @@ app.use(express.static(__dirname + '/public'));
 var numUsers = 0;
 
 io.on('connection', function (socket) {
+    console.log("----------------",socket);
     var addedUser = false;
+    socket.join(room,function () {
 
+    })
     // when the client emits 'new message', this listens and executes
     socket.on('new message', function (data) {
         // we tell the client to execute 'new message'
@@ -73,8 +76,5 @@ io.on('connection', function (socket) {
         }
     });
 
-    // io.on('connection', function(socket){
-    //     socket.join('some room');
-    //     io.to('some room').emit('some event');
-    // });
+
 });
