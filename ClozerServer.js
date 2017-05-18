@@ -99,6 +99,9 @@ io.on('connection', function (socket) {
             }
             console.log("rooms defined",rooms,"room we have:",room);
         }
+        socket.emit('login', {
+            numUsers: rooms[room].length
+        });
     });
 
 
