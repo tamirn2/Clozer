@@ -32,6 +32,7 @@ io.on('connection', function (socket) {
             username: socket.username,
             message: data
         });*/
+        //
         socket.to(room).emit('new message', {
          username: socket.username,
          message: data
