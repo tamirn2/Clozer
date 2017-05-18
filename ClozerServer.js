@@ -22,7 +22,6 @@ io.on('connection', function (socket) {
     var addedUser = false;
     var room = socket.handshake['query']['room_var'];
     // console.log("rooms we defined",rooms[room]);
-
     // console.log("room debug:",room);
     socket.join(room);
     // console.log('user joined room #'+room);
