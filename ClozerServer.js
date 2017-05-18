@@ -17,7 +17,7 @@ app.use(express.static(__dirname + '/public'));
 var numUsers = 0;
 
 io.on('connection', function (socket) {
-    console.log("----------------",socket);
+    //console.log("----------------",socket);
     var addedUser = false;
      var room = socket.handshake['query']['room_var'];
 
