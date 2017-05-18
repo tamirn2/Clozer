@@ -65,7 +65,7 @@ io.on('connection', function (socket) {
         if (addedUser) {
             --numUsers;
 
-            // echo globally that this client has left
+            // echo globally that this client has lefte
             socket.broadcast.emit('user left', {
                 username: socket.username,
                 numUsers: numUsers
