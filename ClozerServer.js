@@ -22,12 +22,7 @@ io.on('connection', function (socket) {
     var addedUser = false;
     var room = socket.handshake['query']['room_var'];
     console.log("rooms",rooms[room]);
-    if(!rooms[room] || rooms[room] === undefined){
-        rooms[room]=[];
-        rooms[room].push(socket.username);
-    }else{
-        rooms[room].push(socket.username);
-    }
+
     console.log("rooms",rooms);
      socket.join(room);
      console.log('user joined room #'+room);
@@ -54,6 +49,12 @@ io.on('connection', function (socket) {
         // we store the username in the socket session for this client
         socket.username = username;
         ++numUsers;
+        if(!rooms[room] || rooms[room] === undefined){
+            rooms[room]=[];
+            rooms[room].push(socket.username);
+        }else{
+            rooms[room].push(socket.username);
+        }
         addedUser = true;
         socket.emit('login', {
             numUsers: rooms[room].length
